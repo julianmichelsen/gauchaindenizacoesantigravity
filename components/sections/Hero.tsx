@@ -24,7 +24,7 @@ export const Hero: React.FC = () => {
               <span className="flex items-center gap-1.5 bg-brand-gold/10 px-3 py-1.5 rounded-full border border-brand-gold/20">✅ 99,9% SUCESSO</span>
             </div>
 
-            <h1 className="text-3xl sm:text-4xl lg:text-[3.5rem] font-title font-bold leading-[1.15] tracking-wider text-center lg:text-left">
+            <h1 className="text-3xl sm:text-4xl lg:text-[3.5rem] font-title font-bold leading-[1.15] tracking-wide lg:tracking-widest text-center lg:text-left">
               {content.heroHeadline.split('\n').map((line, index) => (
                 <React.Fragment key={index}>
                   {line}
@@ -39,7 +39,7 @@ export const Hero: React.FC = () => {
 
             <div className="bg-white/10 p-5 sm:p-6 rounded-xl border border-white/20 mt-1 backdrop-blur-sm">
               <p className="text-base sm:text-lg mb-4 leading-relaxed text-center lg:text-left">
-                Motoristas, entregadores e passageiros de aplicativos têm direito a indenização em caso de acidentes com lesões. <strong className="text-brand-gold">Pouca gente sabe disso.</strong>
+                Motoristas, entregadores e passageiros de aplicativos têm direito a indenização em caso de acidentes com lesões. <br className="block sm:hidden" /><strong className="text-brand-gold">Pouca gente sabe disso.</strong>
               </p>
 
               <ul className="space-y-3 flex flex-col items-start">
