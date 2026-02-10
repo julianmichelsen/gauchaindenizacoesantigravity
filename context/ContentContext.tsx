@@ -19,7 +19,7 @@ export interface AppContent {
 
 // Conteúdo padrão inicial (o que já estava no código)
 const defaultContent: AppContent = {
-  heroHeadline: "Você Trabalha ou Usa\nUber, 99, iFood?\nSofreu um Acidente\nnos Últimos 12 Meses?",
+  heroHeadline: "Você trabalha ou usa\nUber, 99, iFood?\nSofreu um acidente\nnos últimos 12 meses?",
   heroSubheadline: "Você Pode Ter Direito a Até R$ 100 Mil",
   videoUrl: "https://www.youtube.com/watch?v=LXb3EKWsInQ",
   partnersTogetherImage: "/Imagens/socios-juntos.JPG",
