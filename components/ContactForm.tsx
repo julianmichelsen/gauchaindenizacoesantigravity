@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { generateWhatsAppLink } from '../constants';
+import { ShieldCheck, Lock } from 'lucide-react';
 
 interface ContactFormProps {
   buttonText?: string;
@@ -25,48 +26,56 @@ export const ContactForm: React.FC<ContactFormProps> = ({ buttonText = "DESCOBRI
   };
 
   return (
-    <form onSubmit={handleSubmit} className="bg-white p-6 sm:p-8 rounded-xl shadow-2xl flex flex-col gap-4 w-full max-w-md mx-auto relative z-10 border border-gray-100">
-      <h3 className="text-xl font-title text-brand-blue font-bold text-center mb-2">
-        Descubra Seus Direitos Agora - Consulta Gratuita
-      </h3>
-      
+    <form onSubmit={handleSubmit} className="bg-white p-6 sm:p-8 rounded-2xl shadow-2xl flex flex-col gap-5 w-full max-w-md mx-auto relative z-10 border border-gray-100">
+      {/* Header */}
+      <div className="text-center">
+        <div className="inline-flex items-center gap-1.5 bg-green-50 text-green-700 text-xs font-bold uppercase tracking-wider px-3 py-1 rounded-full mb-3 border border-green-200">
+          <span className="w-2 h-2 bg-green-500 rounded-full animate-pulse"></span>
+          Consulta Gratuita
+        </div>
+        <h3 className="text-xl sm:text-2xl font-title text-brand-blue font-bold leading-tight">
+          Descubra Seus Direitos Agora
+        </h3>
+        <p className="text-sm text-gray-500 mt-1">Preencha o formulário para uma análise rápida e gratuita.</p>
+      </div>
+
       <div>
-        <label htmlFor="name" className="block text-sm font-medium text-gray-700 mb-1">Nome completo</label>
-        <input 
-          type="text" 
-          id="name" 
-          name="name" 
+        <label htmlFor="name" className="block text-sm font-semibold text-gray-700 mb-1.5">Nome completo</label>
+        <input
+          type="text"
+          id="name"
+          name="name"
           required
           value={formData.name}
           onChange={handleChange}
-          className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-brand-blue focus:border-brand-blue outline-none transition-colors"
+          className="w-full px-4 py-3.5 rounded-xl border border-gray-200 focus:ring-2 focus:ring-brand-blue focus:border-brand-blue outline-none transition-all bg-gray-50 hover:bg-white"
           placeholder="Seu nome"
         />
       </div>
 
       <div>
-        <label htmlFor="whatsapp" className="block text-sm font-medium text-gray-700 mb-1">WhatsApp (com DDD)</label>
-        <input 
-          type="tel" 
-          id="whatsapp" 
-          name="whatsapp" 
+        <label htmlFor="whatsapp" className="block text-sm font-semibold text-gray-700 mb-1.5">WhatsApp (com DDD)</label>
+        <input
+          type="tel"
+          id="whatsapp"
+          name="whatsapp"
           required
           value={formData.whatsapp}
           onChange={handleChange}
-          className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-brand-blue focus:border-brand-blue outline-none transition-colors"
+          className="w-full px-4 py-3.5 rounded-xl border border-gray-200 focus:ring-2 focus:ring-brand-blue focus:border-brand-blue outline-none transition-all bg-gray-50 hover:bg-white"
           placeholder="(00) 00000-0000"
         />
       </div>
 
       <div>
-        <label htmlFor="type" className="block text-sm font-medium text-gray-700 mb-1">Tipo de acidente</label>
-        <select 
-          id="type" 
-          name="type" 
+        <label htmlFor="type" className="block text-sm font-semibold text-gray-700 mb-1.5">Tipo de acidente</label>
+        <select
+          id="type"
+          name="type"
           required
           value={formData.type}
           onChange={handleChange}
-          className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-brand-blue focus:border-brand-blue outline-none transition-colors bg-white"
+          className="w-full px-4 py-3.5 rounded-xl border border-gray-200 focus:ring-2 focus:ring-brand-blue focus:border-brand-blue outline-none transition-all bg-gray-50 hover:bg-white appearance-none"
         >
           <option value="" disabled>Selecione uma opção</option>
           <option value="Uber/99">Uber / 99</option>
@@ -78,14 +87,14 @@ export const ContactForm: React.FC<ContactFormProps> = ({ buttonText = "DESCOBRI
       </div>
 
       <div>
-        <label htmlFor="when" className="block text-sm font-medium text-gray-700 mb-1">Quando aconteceu?</label>
-        <select 
-          id="when" 
-          name="when" 
+        <label htmlFor="when" className="block text-sm font-semibold text-gray-700 mb-1.5">Quando aconteceu?</label>
+        <select
+          id="when"
+          name="when"
           required
           value={formData.when}
           onChange={handleChange}
-          className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-brand-blue focus:border-brand-blue outline-none transition-colors bg-white"
+          className="w-full px-4 py-3.5 rounded-xl border border-gray-200 focus:ring-2 focus:ring-brand-blue focus:border-brand-blue outline-none transition-all bg-gray-50 hover:bg-white appearance-none"
         >
           <option value="" disabled>Selecione uma opção</option>
           <option value="Últimos 3 meses">Últimos 3 meses</option>
@@ -95,22 +104,27 @@ export const ContactForm: React.FC<ContactFormProps> = ({ buttonText = "DESCOBRI
         </select>
       </div>
 
-      <button 
-        type="submit" 
-        className="w-full bg-brand-gold text-brand-blue font-bold py-4 px-6 rounded-lg shadow-md hover:bg-yellow-500 hover:shadow-lg transition-all min-h-[44px] mt-2 text-lg"
+      <button
+        type="submit"
+        className="w-full bg-brand-gold text-brand-blue font-bold py-4 px-6 rounded-xl shadow-md hover:bg-yellow-400 hover:shadow-lg hover:-translate-y-0.5 transition-all min-h-[52px] mt-1 text-base sm:text-lg"
       >
         {buttonText}
       </button>
 
-      <a 
+      <a
         href={generateWhatsAppLink("Olá! Gostaria de falar direto pelo WhatsApp para uma análise rápida.")}
         target="_blank"
         rel="noopener noreferrer"
-        className="w-full bg-[#25D366] text-white font-bold py-3 px-6 rounded-lg shadow-md hover:bg-green-600 hover:shadow-lg transition-all flex items-center justify-center gap-2 min-h-[44px] text-center text-sm sm:text-base"
+        className="w-full bg-[#25D366] text-white font-bold py-3.5 px-6 rounded-xl shadow-md hover:bg-green-600 hover:shadow-lg hover:-translate-y-0.5 transition-all flex items-center justify-center gap-2 min-h-[48px] text-center text-sm sm:text-base"
       >
         💬 Falar Direto pelo WhatsApp
       </a>
-      <p className="text-xs text-center text-gray-500 mt-1">Resposta em 5min no horário comercial</p>
+
+      {/* Trust micro-badges */}
+      <div className="flex items-center justify-center gap-4 text-xs text-gray-400 pt-1">
+        <span className="flex items-center gap-1"><Lock size={12} /> Dados seguros</span>
+        <span className="flex items-center gap-1"><ShieldCheck size={12} /> 100% gratuito</span>
+      </div>
     </form>
   );
 };

@@ -1,4 +1,4 @@
-import React from 'react';
+import * as React from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { ContentProvider } from './context/ContentContext';
 
@@ -17,11 +17,15 @@ import { Location } from './components/sections/Location';
 import { FinalCTA } from './components/sections/FinalCTA';
 import { Footer } from './components/Footer';
 import { FloatingWhatsApp } from './components/FloatingWhatsApp';
+import { TrackingScripts } from './components/TrackingScripts';
 
+import { Header } from './components/Header';
 import { Admin } from './pages/Admin';
 
 const LandingPage: React.FC = () => (
   <div className="min-h-screen bg-white font-body selection:bg-brand-gold selection:text-brand-blue">
+    <TrackingScripts />
+    <Header />
     <main>
       <Hero />
       <Stats />
@@ -49,7 +53,7 @@ const App: React.FC = () => {
         <Routes>
           {/* Rota Pública (Landing Page) */}
           <Route path="/" element={<LandingPage />} />
-          
+
           {/* Rota Privada (Painel Administrativo) */}
           <Route path="/admin" element={<Admin />} />
         </Routes>
