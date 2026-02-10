@@ -24,8 +24,13 @@ export const Hero: React.FC = () => {
               <span className="flex items-center gap-1.5 bg-brand-gold/10 px-3 py-1.5 rounded-full border border-brand-gold/20">✅ 99,9% SUCESSO</span>
             </div>
 
-            <h1 className="text-3xl sm:text-4xl lg:text-[3.5rem] font-title font-bold leading-[1.15] text-center lg:text-left">
-              {content.heroHeadline}
+            <h1 className="text-3xl sm:text-4xl lg:text-[3.5rem] font-title font-bold leading-[1.15] tracking-wider text-center lg:text-left">
+              {content.heroHeadline.split('\n').map((line, index) => (
+                <React.Fragment key={index}>
+                  {line}
+                  {index < content.heroHeadline.split('\n').length - 1 && <br className="hidden lg:block" />}
+                </React.Fragment>
+              ))}
             </h1>
 
             <p className="text-lg sm:text-xl lg:text-2xl font-light text-gray-200 text-center lg:text-left leading-relaxed">

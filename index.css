@@ -17,9 +17,23 @@ body {
 }
 
 /* Headings */
-h1, h2, h3, h4, h5, h6 {
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
   font-family: 'Vocago', 'Montserrat', system-ui, sans-serif;
   line-height: 1.2;
+  letter-spacing: 0.02em;
+}
+
+/* Global input text color fix */
+input,
+select,
+textarea {
+  color: #05122e !important;
+  /* brand-blue */
 }
 
 /* ========================================
@@ -36,20 +50,29 @@ h1, h2, h3, h4, h5, h6 {
 ::-webkit-scrollbar {
   width: 8px;
 }
+
 ::-webkit-scrollbar-track {
   background: #f5f5f5;
 }
+
 ::-webkit-scrollbar-thumb {
   background: #c0c0c0;
   border-radius: 999px;
 }
+
 ::-webkit-scrollbar-thumb:hover {
   background: #999;
 }
 
 /* Hide scrollbar for carousels */
-.no-scrollbar::-webkit-scrollbar { display: none; }
-.no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
 
 /* ========================================
    Smooth section fade-in on scroll
@@ -63,6 +86,7 @@ section {
     opacity: 0;
     transform: translateY(16px);
   }
+
   to {
     opacity: 1;
     transform: translateY(0);
@@ -84,8 +108,11 @@ select:focus-visible {
 /* ========================================
    Form Input Improvements
    ======================================== */
-input, select, textarea {
-  font-size: 16px !important; /* Prevents iOS zoom */
+input,
+select,
+textarea {
+  font-size: 16px !important;
+  /* Prevents iOS zoom */
 }
 
 /* ========================================
@@ -100,13 +127,15 @@ img {
    Mobile-specific optimizations
    ======================================== */
 @media (max-width: 640px) {
+
   /* Extra bottom padding for floating WhatsApp button */
   footer {
     padding-bottom: 6rem !important;
   }
-  
-  /* Ensure touch targets are at least 44x44 */  
-  button, a {
+
+  /* Ensure touch targets are at least 44x44 */
+  button,
+  a {
     min-height: 44px;
   }
 }
@@ -115,9 +144,12 @@ img {
    Pulse glow for CTA buttons
    ======================================== */
 @keyframes pulseGlow {
-  0%, 100% {
+
+  0%,
+  100% {
     box-shadow: 0 0 15px rgba(241, 214, 160, 0.3);
   }
+
   50% {
     box-shadow: 0 0 30px rgba(241, 214, 160, 0.6);
   }

@@ -23,7 +23,7 @@ export const FinalCTA: React.FC = () => {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 sm:gap-16 items-center">
 
           <div className="flex flex-col gap-6">
-            <h2 className="text-3xl sm:text-4xl md:text-5xl font-title font-bold leading-tight text-center lg:text-left">
+            <h2 className="text-3xl sm:text-4xl md:text-5xl font-title font-bold leading-tight tracking-wide text-center lg:text-left">
               Não Deixe Seus Direitos Para <span className="text-brand-gold">Depois</span>
             </h2>
 

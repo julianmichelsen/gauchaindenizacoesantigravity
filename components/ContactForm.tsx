@@ -48,7 +48,7 @@ export const ContactForm: React.FC<ContactFormProps> = ({ buttonText = "DESCOBRI
           required
           value={formData.name}
           onChange={handleChange}
-          className="w-full px-4 py-3.5 rounded-xl border border-gray-200 focus:ring-2 focus:ring-brand-blue focus:border-brand-blue outline-none transition-all bg-gray-50 hover:bg-white"
+          className="w-full px-4 py-3.5 rounded-xl border border-gray-200 focus:ring-2 focus:ring-brand-blue focus:border-brand-blue outline-none transition-all bg-gray-50 hover:bg-white text-gray-900"
           placeholder="Seu nome"
         />
       </div>
@@ -62,7 +62,7 @@ export const ContactForm: React.FC<ContactFormProps> = ({ buttonText = "DESCOBRI
           required
           value={formData.whatsapp}
           onChange={handleChange}
-          className="w-full px-4 py-3.5 rounded-xl border border-gray-200 focus:ring-2 focus:ring-brand-blue focus:border-brand-blue outline-none transition-all bg-gray-50 hover:bg-white"
+          className="w-full px-4 py-3.5 rounded-xl border border-gray-200 focus:ring-2 focus:ring-brand-blue focus:border-brand-blue outline-none transition-all bg-gray-50 hover:bg-white text-gray-900"
           placeholder="(00) 00000-0000"
         />
       </div>
@@ -75,7 +75,7 @@ export const ContactForm: React.FC<ContactFormProps> = ({ buttonText = "DESCOBRI
           required
           value={formData.type}
           onChange={handleChange}
-          className="w-full px-4 py-3.5 rounded-xl border border-gray-200 focus:ring-2 focus:ring-brand-blue focus:border-brand-blue outline-none transition-all bg-gray-50 hover:bg-white appearance-none"
+          className="w-full px-4 py-3.5 rounded-xl border border-gray-200 focus:ring-2 focus:ring-brand-blue focus:border-brand-blue outline-none transition-all bg-gray-50 hover:bg-white appearance-none text-gray-900"
         >
           <option value="" disabled>Selecione uma opção</option>
           <option value="Uber/99">Uber / 99</option>
@@ -94,7 +94,7 @@ export const ContactForm: React.FC<ContactFormProps> = ({ buttonText = "DESCOBRI
           required
           value={formData.when}
           onChange={handleChange}
-          className="w-full px-4 py-3.5 rounded-xl border border-gray-200 focus:ring-2 focus:ring-brand-blue focus:border-brand-blue outline-none transition-all bg-gray-50 hover:bg-white appearance-none"
+          className="w-full px-4 py-3.5 rounded-xl border border-gray-200 focus:ring-2 focus:ring-brand-blue focus:border-brand-blue outline-none transition-all bg-gray-50 hover:bg-white appearance-none text-gray-900"
         >
           <option value="" disabled>Selecione uma opção</option>
           <option value="Últimos 3 meses">Últimos 3 meses</option>
