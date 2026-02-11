@@ -5,9 +5,10 @@ import {
   Save, LogOut, Settings, Image as ImageIcon, Youtube, Type, AlertCircle,
   BarChart3, Facebook, Eye, EyeOff, CheckCircle, Layout, Code, ArrowLeft,
   Globe, Monitor, ChevronRight, LayoutDashboard, Users, MessageCircle,
-  TrendingUp, ExternalLink, Clock
+  TrendingUp, ExternalLink, Clock, Plus, Trash2, HelpCircle
 } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
+import { ImageUpload } from '../components/ImageUpload';
 
 // Função aprimorada para extrair o ID e gerar o embed (YouTube)
 const getSafeEmbedUrl = (url: string) => {
@@ -21,7 +22,7 @@ const getSafeEmbedUrl = (url: string) => {
 };
 
 // ============ TABS ============
-type AdminTab = 'dashboard' | 'conteudo' | 'tracking' | 'aparencia';
+type AdminTab = 'dashboard' | 'conteudo' | 'depoimentos' | 'faq' | 'tracking' | 'aparencia';
 
 interface TabItem {
   id: AdminTab;
@@ -33,6 +34,8 @@ interface TabItem {
 const tabs: TabItem[] = [
   { id: 'dashboard', label: 'Dashboard', icon: <LayoutDashboard size={20} />, description: 'Resumo e estatísticas' },
   { id: 'conteudo', label: 'Conteúdo', icon: <Type size={20} />, description: 'Textos e imagens' },
+  { id: 'depoimentos', label: 'Depoimentos', icon: <MessageCircle size={20} />, description: 'Avaliações de clientes' },
+  { id: 'faq', label: 'FAQ', icon: <HelpCircle size={20} />, description: 'Perguntas frequentes' },
   { id: 'tracking', label: 'Rastreamento', icon: <BarChart3 size={20} />, description: 'Pixel e Analytics' },
   { id: 'aparencia', label: 'Aparência', icon: <Layout size={20} />, description: 'Cores e estilo' },
 ];
@@ -148,6 +151,54 @@ export const Admin: React.FC = () => {
     setFormData(prev => ({ ...prev, [name]: value }));
   };
 
+  // --- Testimonials Handlers ---
+  const addTestimonial = () => {
+    setFormData(prev => ({
+      ...prev,
+      testimonials: [...(prev.testimonials || []), { id: Date.now().toString(), imageUrl: '' }]
+    }));
+  };
+
+  const updateTestimonial = (id: string, imageUrl: string) => {
+    setFormData(prev => ({
+      ...prev,
+      testimonials: prev.testimonials.map(t => t.id === id ? { ...t, imageUrl } : t)
+    }));
+  };
+
+  const removeTestimonial = (id: string) => {
+    if (window.confirm('Tem certeza que deseja remover este depoimento?')) {
+      setFormData(prev => ({
+        ...prev,
+        testimonials: prev.testimonials.filter(t => t.id !== id)
+      }));
+    }
+  };
+
+  // --- FAQ Handlers ---
+  const addFAQ = () => {
+    setFormData(prev => ({
+      ...prev,
+      faq: [...(prev.faq || []), { id: Date.now().toString(), question: '', answer: '' }]
+    }));
+  };
+
+  const updateFAQ = (id: string, field: 'question' | 'answer', value: string) => {
+    setFormData(prev => ({
+      ...prev,
+      faq: prev.faq.map(f => f.id === id ? { ...f, [field]: value } : f)
+    }));
+  };
+
+  const removeFAQ = (id: string) => {
+    if (window.confirm('Tem certeza que deseja remover esta pergunta?')) {
+      setFormData(prev => ({
+        ...prev,
+        faq: prev.faq.filter(f => f.id !== id)
+      }));
+    }
+  };
+
   const handleSave = () => {
     setSaveStatus('saving');
     updateContent(formData);
@@ -234,8 +285,8 @@ export const Admin: React.FC = () => {
                     key={tab.id}
                     onClick={() => setActiveTab(tab.id)}
                     className={`w-full flex items-center gap-3 px-4 py-3 rounded-xl text-left transition-all group ${activeTab === tab.id
-                        ? 'bg-brand-blue text-white shadow-lg'
-                        : 'text-gray-600 hover:bg-gray-50'
+                      ? 'bg-brand-blue text-white shadow-lg'
+                      : 'text-gray-600 hover:bg-gray-50'
                       }`}
                   >
                     <span className={activeTab === tab.id ? 'text-brand-gold' : 'text-gray-400 group-hover:text-brand-blue'}>{tab.icon}</span>
@@ -331,11 +382,115 @@ export const Admin: React.FC = () => {
                 </SectionCard>
 
                 <SectionCard title="Quem Somos" icon={<ImageIcon size={18} />}>
-                  <AdminInput label="Link da Foto dos Sócios" name="partnersTogetherImage" value={formData.partnersTogetherImage} onChange={handleChange} />
-                  {formData.partnersTogetherImage && <img src={formData.partnersTogetherImage} alt="Preview" className="mt-3 h-40 rounded-xl object-cover border border-gray-200 shadow-sm" />}
+                  <div className="mb-6">
+                    <ImageUpload
+                      label="Foto dos Sócios"
+                      currentImage={formData.partnersTogetherImage}
+                      onImageUploaded={(url) => setFormData(prev => ({ ...prev, partnersTogetherImage: url }))}
+                      helperText="Recomendado: 800x600px ou maior."
+                    />
+                  </div>
                   <AdminInput label="Apresentação 1" name="aboutText1" value={formData.aboutText1} onChange={handleChange} rows={4} />
                   <AdminInput label="Apresentação 2" name="aboutText2" value={formData.aboutText2} onChange={handleChange} rows={4} />
                 </SectionCard>
+              </div>
+            )}
+
+            {/* ##### TAB: DEPOIMENTOS ##### */}
+            {activeTab === 'depoimentos' && (
+              <div className="space-y-6 animate-in fade-in slide-in-from-bottom-2 duration-500">
+                <div className="flex justify-between items-center mb-4">
+                  <h3 className="text-xl font-bold text-gray-800">Gerenciar Depoimentos</h3>
+                  <button onClick={addTestimonial} className="bg-brand-blue text-white px-4 py-2 rounded-lg font-bold text-sm flex items-center gap-2 hover:bg-brand-blue/90 transition-all shadow-md">
+                    <Plus size={16} /> Adicionar Novo
+                  </button>
+                </div>
+
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                  {formData.testimonials?.map((testimonial) => (
+                    <div key={testimonial.id} className="bg-white p-5 rounded-2xl border border-gray-200 shadow-sm relative group">
+                      <button
+                        onClick={() => removeTestimonial(testimonial.id)}
+                        className="absolute top-3 right-3 p-2 bg-red-100 text-red-600 rounded-lg hover:bg-red-200 transition-colors opacity-0 group-hover:opacity-100"
+                        title="Remover"
+                      >
+                        <Trash2 size={16} />
+                      </button>
+
+                      <ImageUpload
+                        label={`Depoimento #${testimonial.id.slice(-4)}`}
+                        currentImage={testimonial.imageUrl}
+                        onImageUploaded={(url) => updateTestimonial(testimonial.id, url)}
+                      />
+                    </div>
+                  ))}
+
+                  {(!formData.testimonials || formData.testimonials.length === 0) && (
+                    <div className="col-span-full py-12 text-center text-gray-400 bg-gray-50 rounded-2xl border-2 border-dashed border-gray-200">
+                      <MessageCircle size={48} className="mx-auto mb-3 opacity-20" />
+                      <p>Nenhum depoimento cadastrado ainda.</p>
+                    </div>
+                  )}
+                </div>
+              </div>
+            )}
+
+            {/* ##### TAB: FAQ ##### */}
+            {activeTab === 'faq' && (
+              <div className="space-y-6 animate-in fade-in slide-in-from-bottom-2 duration-500">
+                <div className="flex justify-between items-center mb-4">
+                  <h3 className="text-xl font-bold text-gray-800">Perguntas Frequentes</h3>
+                  <button onClick={addFAQ} className="bg-brand-blue text-white px-4 py-2 rounded-lg font-bold text-sm flex items-center gap-2 hover:bg-brand-blue/90 transition-all shadow-md">
+                    <Plus size={16} /> Adicionar Pergunta
+                  </button>
+                </div>
+
+                <div className="space-y-4">
+                  {formData.faq?.map((item, index) => (
+                    <div key={item.id} className="bg-white p-6 rounded-2xl border border-gray-200 shadow-sm transition-all hover:shadow-md">
+                      <div className="flex justify-between items-start mb-4">
+                        <span className="bg-gray-100 text-gray-500 text-xs font-bold px-2 py-1 rounded uppercase tracking-wider">Pergunta #{index + 1}</span>
+                        <button
+                          onClick={() => removeFAQ(item.id)}
+                          className="text-red-400 hover:text-red-600 p-1 rounded-md hover:bg-red-50 transition-colors"
+                          title="Remover"
+                        >
+                          <Trash2 size={18} />
+                        </button>
+                      </div>
+
+                      <div className="space-y-4">
+                        <div>
+                          <label className="block text-sm font-bold text-gray-700 mb-1">Pergunta</label>
+                          <input
+                            type="text"
+                            className="w-full px-4 py-2 rounded-lg border border-gray-300 focus:ring-2 focus:ring-brand-blue focus:border-transparent outline-none transition-all"
+                            value={item.question}
+                            onChange={(e) => updateFAQ(item.id, 'question', e.target.value)}
+                            placeholder="Ex: Como funciona o processo?"
+                          />
+                        </div>
+                        <div>
+                          <label className="block text-sm font-bold text-gray-700 mb-1">Resposta</label>
+                          <textarea
+                            className="w-full px-4 py-2 rounded-lg border border-gray-300 focus:ring-2 focus:ring-brand-blue focus:border-transparent outline-none transition-all"
+                            rows={3}
+                            value={item.answer}
+                            onChange={(e) => updateFAQ(item.id, 'answer', e.target.value)}
+                            placeholder="Digite a resposta aqui..."
+                          />
+                        </div>
+                      </div>
+                    </div>
+                  ))}
+
+                  {(!formData.faq || formData.faq.length === 0) && (
+                    <div className="py-12 text-center text-gray-400 bg-gray-50 rounded-2xl border-2 border-dashed border-gray-200">
+                      <HelpCircle size={48} className="mx-auto mb-3 opacity-20" />
+                      <p>Nenhuma pergunta cadastrada.</p>
+                    </div>
+                  )}
+                </div>
               </div>
             )}
 

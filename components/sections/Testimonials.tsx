@@ -1,16 +1,10 @@
-import * as React from 'react';
+import { useContent } from '../../context/ContentContext';
 import { Star } from 'lucide-react';
 
-const evaluationImages = [
-  "/Imagens/Avaliacoes/IMG_9732.PNG",
-  "/Imagens/Avaliacoes/IMG_9734.PNG",
-  "/Imagens/Avaliacoes/IMG_9735.PNG",
-  "/Imagens/Avaliacoes/IMG_9736.PNG",
-  "/Imagens/Avaliacoes/IMG_9737.PNG",
-  "/Imagens/Avaliacoes/IMG_9737(1).PNG",
-];
-
 export const Testimonials: React.FC = () => {
+  const { content } = useContent();
+  const evaluationImages = content.testimonials || [];
+
   return (
     <section id="depoimentos" className="py-16 sm:py-20 bg-brand-gray">
       <div className="container mx-auto px-4 sm:px-6 max-w-6xl">
@@ -23,11 +17,11 @@ export const Testimonials: React.FC = () => {
         </div>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-5 sm:gap-6 lg:gap-8 max-w-5xl mx-auto">
-          {evaluationImages.map((src, idx) => (
-            <div key={idx} className="bg-white p-3 sm:p-4 rounded-2xl shadow-sm hover:shadow-xl border border-gray-100/80 transform hover:scale-[1.01] transition-all duration-300 group">
+          {evaluationImages.map((testimonial) => (
+            <div key={testimonial.id} className="bg-white p-3 sm:p-4 rounded-2xl shadow-sm hover:shadow-xl border border-gray-100/80 transform hover:scale-[1.01] transition-all duration-300 group">
               <img
-                src={src}
-                alt={`Depoimento ${idx + 1}`}
+                src={testimonial.imageUrl}
+                alt={`Depoimento`}
                 className="w-full h-auto rounded-xl object-contain"
                 loading="lazy"
               />

@@ -12,9 +12,26 @@ export interface AppContent {
   partnersTogetherImage: string;
   aboutText1: string;
   aboutText2: string;
+  // Dynamic Content (JSONB in DB)
+  testimonials: Testimonial[];
+  faq: FAQItem[];
   // Tracking & Analytics
   facebookPixelId: string;
   googleAnalyticsId: string;
+}
+
+export interface Testimonial {
+  id: string;
+  imageUrl: string;
+  name?: string; // Optional for now as current design is just images
+  text?: string;
+  role?: string;
+}
+
+export interface FAQItem {
+  id: string;
+  question: string;
+  answer: string;
 }
 
 // Conteúdo padrão inicial (o que já estava no código)
@@ -25,6 +42,26 @@ const defaultContent: AppContent = {
   partnersTogetherImage: "/Imagens/socios-juntos.JPG",
   aboutText1: "Iniciamos a Gaúcha Indenizações em 2014 com um propósito claro: oferecer um atendimento humanizado, ágil e transparente para quem mais precisa.",
   aboutText2: "Unimos nossa vivência profissional e pessoal para garantir que cada cliente seja tratado com respeito, proximidade e acompanhamento direto.",
+  testimonials: [
+    { id: '1', imageUrl: "/Imagens/Avaliacoes/IMG_9732.PNG" },
+    { id: '2', imageUrl: "/Imagens/Avaliacoes/IMG_9734.PNG" },
+    { id: '3', imageUrl: "/Imagens/Avaliacoes/IMG_9735.PNG" },
+    { id: '4', imageUrl: "/Imagens/Avaliacoes/IMG_9736.PNG" },
+    { id: '5', imageUrl: "/Imagens/Avaliacoes/IMG_9737.PNG" },
+    { id: '6', imageUrl: "/Imagens/Avaliacoes/IMG_9737(1).PNG" },
+  ],
+  faq: [
+    { id: '1', question: "Seguro só paga se eu morrer?", answer: "❌ Não! Invalidez parcial (até mesmo uma fratura simples) já pode gerar direito a indenização considerável." },
+    { id: '2', question: "Só tenho DPVAT?", answer: "Provavelmente não. A maioria das pessoas tem seguros que nem sabe: seguro de vida do banco, seguro de grupo da empresa, seguro da plataforma de app. Nós investigamos e descobrimos TODOS." },
+    { id: '3', question: "Já faz mais de 1 ano do acidente. Perdi o prazo?", answer: "Depende. Para responsabilidade civil (contra quem causou), você tem até 3 anos. Para seguro de vida, até 1 ano APÓS o fim do tratamento médico (alta). Consulte-nos gratuitamente para avaliar seu caso." },
+    { id: '4', question: "Quanto custa a consultoria?", answer: "A consulta e análise são 100% gratuitas. Só cobramos honorários se você ganhar, e você recebe o valor integral primeiro na sua conta antes de nos repassar a nossa parte." },
+    { id: '5', question: "Quanto tempo demora para receber?", answer: "Varia de 3 meses a 2 anos dependendo da complexidade do caso e da seguradora. Mantemos você informado de forma proativa em cada etapa do processo." },
+    { id: '6', question: "Preciso ir até o escritório?", answer: "Não! Atendemos de forma 100% online em todo o Rio Grande do Sul. Mas se preferir um café, nosso escritório físico fica no Centro Histórico de Porto Alegre." },
+    { id: '7', question: "Trabalho com Uber/99. Tenho direito mesmo?", answer: "SIM! Motoristas, entregadores E passageiros têm cobertura garantida pelas plataformas durante viagens e entregas ativas." },
+    { id: '8', question: "Meu acidente foi 'leve'. Não vale a pena?", answer: "Não subestime! Até fraturas simples (como um dedo ou punho) podem gerar indenizações significativas. A única forma de saber o valor exato é fazendo uma análise gratuita conosco." },
+    { id: '9', question: "A seguradora já negou meu pedido. E agora?", answer: "Você tem o direito de saber o motivo da negativa por escrito e pode solicitar reanálise com documentação complementar, ou via judicial. Nós somos especialistas em reverter negativas. Podemos ajudar!" },
+    { id: '10', question: "O que acontece se o DPVAT acabou?", answer: "Quem sofreu acidente até 14/11/2023 ainda pode solicitar o DPVAT antigo. Além disso, mesmo sem DPVAT, existem outros seguros (vida, apps, empresa) que continuam ativos e pagam muito mais." },
+  ],
   facebookPixelId: "1426646388899981",
   googleAnalyticsId: "",
 };
